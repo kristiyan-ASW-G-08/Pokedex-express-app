@@ -33,7 +33,10 @@ exports.getPokedex = (req, res, next) => {
   })
 };
 exports.getPokemon = (req, res, next) => {
-  const {pokemonName} = req.params;
+  let {pokemonName} = req.params;
+  if(!pokemonName){
+   pokemonName = req.body.pokemonName
+  }
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
   getData(apiUrl)
   .then(data => {

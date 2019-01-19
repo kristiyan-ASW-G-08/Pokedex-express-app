@@ -1,6 +1,6 @@
-
 const nextPageBtn = document.querySelector('#next-btn');
 const previousPageBtn = document.querySelector('#previous-btn');
+const pokemonBtn = document.querySelector('#pokemon-form');
 if (nextPageBtn) {
   nextPageBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -15,4 +15,11 @@ if (previousPageBtn) {
     previousPageForm.submit();
   });
 }
-
+if(pokemonBtn){
+  pokemonBtn.addEventListener('click',e => {
+    e.preventDefault()
+    const pokemonForm = document.querySelector('#pokemon-form')
+  pokemonForm.submit()
+  })
+  
+}
