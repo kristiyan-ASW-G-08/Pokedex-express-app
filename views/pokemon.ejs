@@ -1,0 +1,51 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <section class="section">
+      <div class="columns">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>" >
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-size-5"><%= pokemon.name %> </p>
+                  <p class="subtitle is-size-6">#<%= pokemon.id %></p>
+                  <p class="subtitle is-size-6">Height: <%= pokemon.height %></p>
+                  <p class="subtitle is-size-6">Weight: <%= pokemon.weight %></p>
+                  <% for (let type of pokemon.types) { %>
+                    <p class="subtitle is-size-6">Type: <%= type.type.name %></p>    
+                    <% }  %> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-two-thirds">         
+         <% for (let stat of pokemon.stats) { %>
+          <div>
+              <label class="label"><%= stat.statName %></label>
+                <progress class="progress is-primary" value="<%= stat.statValue %>" max="100"></progress>
+            </div>        
+          <% }  %>  
+        </div>
+          </div>
+      </div>      
+    </section>
+    
+
+        
+   
+
+<%- include('includes/end.ejs') %>
+
+
+
+
+
+      
