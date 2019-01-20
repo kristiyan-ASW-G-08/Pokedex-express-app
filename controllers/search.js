@@ -7,24 +7,25 @@ exports.getSearchPage = (req, res, next) => {
   exports.search = (req,res,next) => {
     const {name} = req.body  
     const {subject} = req.body
-    let apiUrl;
+    let redirectUrl;
     switch (subject) {
         case 'Pokemon':
-          res.redirect(`/pokemon/${name}`)
+          redirectUrl = `/pokemon/${name}`
           break;
-        case 'Berries':
-        res.redirect(`/berry/${name}`)
+        case 'Berry':
+        redirectUrl = `/berry/${name}`
+        break;
           case 
-         'Items':
-        apiUrl = `https://pokeapi.co/api/v2/item/${name}/`
+         'Item':
+        redirectUrl = `/item/${name}/`
           break;
-          case 'Moves':
-        apiUrl = `https://pokeapi.co/v2/move/${name}/`
+          case 'Move':
+        redirectUrl = `/move/${name}/`
           break;
         default:
-        apiUrl = `https://pokeapi.co/api/v2/ability/${name}/`
+        redirectUrl = `/404`
       }
-    console.log(name)
-    console.log(subject)
+
+      res.redirect(redirectUrl)
   }
   

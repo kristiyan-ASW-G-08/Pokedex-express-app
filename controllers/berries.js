@@ -1,4 +1,5 @@
 const getData = require('../util/getData');
+const getStringValue = require('../util/getStringValue');
 exports.getBerries = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -27,22 +28,10 @@ exports.getBerries = (req, res, next) => {
 exports.getBerry = (req, res, next) => {
   let { berryName } = req.params;
   const apiUrl = `https://pokeapi.co/api/v2/berry/${berryName}`;
+  console.log(apiUrl)
   getData(apiUrl)
     .then(data => {
-      const stats = Object.entries(data).map(stat => {
-        const value = stat[1];
-        if (value) {
-          if (typeof value === 'string' || typeof value === 'number') {
-            const name = stat[0].split('_').join(' ');
-            if (name !== 'name' && name !== 'id') {
-              return {
-                name,
-                value
-              };
-            }
-          }
-        }
-      });
+      const stats = getStringValue(data)
       const berry = {
         name: data.name,
         id: data.id,

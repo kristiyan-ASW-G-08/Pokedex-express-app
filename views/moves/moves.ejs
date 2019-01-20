@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+  
+  <body>
+      <%- include('../includes/navigation.ejs') %>
+    <section class="section">
+        <% if (moves.length > 0) { %>
+          <div class="columns is-multiline">
+            <% for (let move of moves) { %>
+                <div class="column is-one-quarter">
+                   <a href="/move/<%= move.name %>" class="button"><%= move.name %></a>
+                </div>
+                    <% } %>
+                  </div>
+                    <div class="field is-grouped ">
+                        <% if (previous) { %>
+                          <div class="control ">
+                              <form method="POST" action="/moves" id="previous-form">
+                                <input type="text" hidden value="<%= previous %></" name="previousPage">
+                                <button type="button"class="button is-danger" id="previous-btn">Previous</button>
+                              </form>
+                          </div>
+                          
+                          <% }  %>
+                        <% if (next) { %>
+                          <div class="control">
+                              <form method="POST" action="/moves" id="next-form">
+                                <input type="text" hidden value="<%= next %></" name="nextPage">
+                                <button class="button is-danger" type="button" id="next-btn">Next</button>
+                              </form>
+                          </div>                         
+                          <% }  %>
+                          </div>                
+          <% } else { %>
+              <h1>No Berries Found!</h1>
+              <% } %>
+    </section>
+
+    <%- include('../includes/end.ejs') %>

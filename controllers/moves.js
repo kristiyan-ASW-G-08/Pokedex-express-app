@@ -1,5 +1,6 @@
 const getData = require('../util/getData');
-exports.getItems = (req, res, next) => {
+const getStringValue = require('../util/getStringValue');
+exports.getMoves = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
   const { previousPage } = req.body;
@@ -8,17 +9,15 @@ exports.getItems = (req, res, next) => {
   } else if (previousPage) {
     apiUrl = previousPage;
   } else {
-    apiUrl = 'https://pokeapi.co/api/v2/item';
+    apiUrl = 'https://pokeapi.co/api/v2/move';
   }
   getData(apiUrl)
     .then(data => {
-       const items = data.results.map(item => {
-           item['sprite'] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item.name}.png`
-       }) 
-      res.render('items/items', {
-        items: data.results,
-        path: '/items',
-        title: 'Items',
+      
+      res.render('moves/moves', {
+        moves: data.results,
+        path: '/moves',
+        title: 'Moves',
         previous: data.previous,
         next: data.next
       });
@@ -27,15 +26,21 @@ exports.getItems = (req, res, next) => {
       throw error;
     });
 };
-exports.getItem = (req, res, next) => {
-  let { itemName } = req.params;
-  const apiUrl = `https://pokeapi.co/api/v2/item/${itemName}`;
+exports.getMove = (req, res, next) => {
+  let { moveName } = req.params;
+  const apiUrl = `https://pokeapi.co/api/v2/move/${moveName}`;
   getData(apiUrl)
     .then(data => {
-      res.render('items/item', {
-        path: '/pokemon',
+        const stats =getStringValue(data)
+        const move = {
+            stats,
+            name:data.name,
+            effect_entries:data.effect_entries
+        }
+      res.render('moves/move', {
+        path: '/move',
         title: data.name,
-        data
+        move,
       });
     })
     .catch(error => {

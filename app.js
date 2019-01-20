@@ -6,6 +6,7 @@ const sassMiddleware = require('node-sass-middleware');
 const pokedexRouter = require('./routes/pokedex');
 const searchRouter = require('./routes/search')
 const berriesRouter = require('./routes/berries')
+const movesRouter = require('./routes/moves')
 const itemsRouter = require('./routes/items')
 const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(pokedexRouter)
 app.use(berriesRouter)
+app.use(movesRouter)
 app.use(itemsRouter)
 app.use(searchRouter)
 process.on('unhandledRejection', (reason, p) => {
