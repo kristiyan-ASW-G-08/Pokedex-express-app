@@ -13,9 +13,9 @@ exports.getSearchPage = (req, res, next) => {
           res.redirect(`/pokemon/${name}`)
           break;
         case 'Berries':
-        apiUrl = `https://pokeapi.co/api/v2/berry/${name}/`
-          break;
-          case 'Items':
+        res.redirect(`/berry/${name}`)
+          case 
+         'Items':
         apiUrl = `https://pokeapi.co/api/v2/item/${name}/`
           break;
           case 'Moves':

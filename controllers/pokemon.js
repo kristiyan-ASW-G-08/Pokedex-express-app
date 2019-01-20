@@ -20,7 +20,7 @@ exports.getPokedex = (req, res, next) => {
       pokemon['id'] = pokemonId;
       return pokemon;
     });
-    res.render('pokedex', {
+    res.render('pokemon/pokedex', {
       pokedex,
       path: '/',
       title: 'Pokedex',
@@ -47,7 +47,7 @@ exports.getPokemon = (req, res, next) => {
       }
     });
     data.stats = stats
-    res.render('pokemon', {
+    res.render('pokemon/pokemon', {
       path: '/pokemon',
       title: data.name,
       pokemon:data

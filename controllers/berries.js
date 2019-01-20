@@ -12,7 +12,7 @@ exports.getBerries = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('berries', {
+      res.render('berries/berries', {
         berries: data.results,
         path: '/berries',
         title: 'Berries',
@@ -49,7 +49,7 @@ exports.getBerry = (req, res, next) => {
         flavors: data.flavors,
         stats
       };
-      res.render('berry', {
+      res.render('berries/berry', {
         path: '/pokemon',
         title: data.name,
         berry
