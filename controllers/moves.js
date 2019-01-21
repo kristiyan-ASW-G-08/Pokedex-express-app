@@ -13,7 +13,6 @@ exports.getMoves = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      
       res.render('moves/moves', {
         moves: data.results,
         path: '/moves',
@@ -31,16 +30,23 @@ exports.getMove = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/move/${moveName}`;
   getData(apiUrl)
     .then(data => {
-        const stats =getStringValue(data)
-        const move = {
-            stats,
-            name:data.name,
-            effect_entries:data.effect_entries
-        }
+      if(data.status === 404){
+        res.render('search-error', {
+           error:`Move with name ${moveName} wasn't found.Make sure that your search parameters are correct`,
+           path: '/search-error',
+           title: 'Search Error',
+         });
+       }
+      const stats = getStringValue(data);
+      const move = {
+        stats,
+        name: data.name,
+        effect_entries: data.effect_entries
+      };
       res.render('moves/move', {
         path: '/move',
         title: data.name,
-        move,
+        move
       });
     })
     .catch(error => {
