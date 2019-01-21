@@ -16,6 +16,7 @@ exports.getPokedex = (req, res, next) => {
         const splitUrlArr = pokemon.url.split('/');
         const pokemonIdNum = splitUrlArr.length - 2;
         const pokemonId = splitUrlArr[pokemonIdNum];
+        console.log(pokemonId)
         const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
         pokemon['spriteFront'] = spriteFront;
         pokemon['id'] = pokemonId;

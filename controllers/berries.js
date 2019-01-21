@@ -46,7 +46,7 @@ exports.getBerry = (req, res, next) => {
           stats
         };
         res.render('berries/berry', {
-          path: '/pokemon',
+          path: '/berry',
           title: data.name,
           berry
         });

@@ -41,7 +41,7 @@ exports.getItem = (req, res, next) => {
          });
        }
       res.render('items/item', {
-        path: '/pokemon',
+        path: '/item',
         title: data.name,
         data
       });
