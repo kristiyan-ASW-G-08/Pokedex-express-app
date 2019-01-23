@@ -1,4 +1,5 @@
 const getData = require('../util/getData');
+const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
 exports.getPalParkAreas = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -39,9 +40,7 @@ exports.getPalParkArea = (req, res, next) => {
         });
       }
       const pokemonEncounters  = data.pokemon_encounters.map(pokemon => {
-        const splitUrlArr = pokemon.pokemon_species.url.split('/');
-        const pokemonIdNum = splitUrlArr.length - 2;
-        const pokemonId = splitUrlArr[pokemonIdNum];
+        const pokemonId = getPokemonIdFromUrl(pokemon.url);;
           return {
               name:pokemon.pokemon_species.name,
               id:pokemonId,

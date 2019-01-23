@@ -7,6 +7,7 @@ const pokedexRouter = require('./routes/pokedex');
 const searchRouter = require('./routes/search')
 const berriesRouter = require('./routes/berries')
 const movesRouter = require('./routes/moves')
+const regionsRouter = require('./routes/regions')
 const itemsRouter = require('./routes/items')
 const palParkAreasRouter = require('./routes/palParkAreas')
 const bodyParser = require('body-parser');
@@ -31,9 +32,10 @@ app.use(berriesRouter)
 app.use(movesRouter)
 app.use(palParkAreasRouter)
 app.use(itemsRouter)
+app.use(regionsRouter)
 app.use(searchRouter)
 process.on('unhandledRejection', (reason, p) => {
-  
+  throw reason
 });
 
 app.use(errorController.get404);
