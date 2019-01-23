@@ -37,7 +37,6 @@ exports.getPokedex = (req, res, next) => {
 exports.getPokemon = (req, res, next) => {
   let { pokemonName } = req.params;
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-  console.log(apiUrl);
   getData(apiUrl)
     .then(data => {
       if (data.status === 404) {
@@ -53,7 +52,21 @@ exports.getPokemon = (req, res, next) => {
           statName: info.stat.name
         };
       });
+      const sprites = Object.entries(data.sprites).map(sprite => {
+        const spriteName = sprite[0].split('_').join(' ')
+        if(sprite[1]){
+          return {
+            spriteName,
+            sprite:sprite[1]
+          }
+        }
+        
+        
+      });
+      console.log(sprites)
       data.stats = stats;
+      data.defaultSprite = data.sprites.front_default
+      data.sprites = sprites
       res.render('pokemon/pokemon', {
         path: '/pokemon',
         title: data.name,

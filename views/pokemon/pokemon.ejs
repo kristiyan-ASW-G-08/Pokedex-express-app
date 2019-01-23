@@ -3,15 +3,16 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
     <section class="section">
-      <div class="columns">
+      <div class="columns is-multiline">
         <div class="column is-one-third">
           <div class="card">
             <div class="card-content">
               <div class="media">
                 <div class="media-left">
                   <figure class="image is-48x48">
-                    <img src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>" >
+                    <img src="<%= pokemon.defaultSprite %>" alt="<%= pokemon.name %>" >
                   </figure>
+                  
                 </div>
                 <div class="media-content">
                   <p class="title is-size-5"><%= pokemon.name %> </p>
@@ -30,15 +31,57 @@
          <% for (let stat of pokemon.stats) { %>
           <div>
               <label class="label"><%= stat.statName %></label>
-                <progress class="progress is-primary" value="<%= stat.statValue %>" max="100"></progress>
+                <progress class="progress is-primary" value="<%= stat.statValue %>" max="100"><%= stat.statValue %></progress>
             </div>        
           <% }  %>  
         </div>
           </div>
+         </div>
       </div>      
     </section>
-    
-
+    <section class="section">
+      <div class="container has-text-centered">
+        <h2 class="title is-size-3">Sprites</h2>
+      </div>
+      <div class="column">
+        <div class="columns is-multiline">
+           <% for (let sprite of pokemon.sprites) { %>
+            <% if (sprite) { %>
+              <div class="column is-one-quarter">
+                <div class="card">
+  
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-48x48">
+                          <img src="<%= sprite.sprite %>" alt="Placeholder image">
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <p class="title is-size-5"><%= sprite.spriteName %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               </div>
+              <% }  %>
+               
+                   <% } %>
+                 </div>
+      </div>
+    </section>
+    <section class="section">
+        <div class="container has-text-centered">
+          <h2 class="title is-size-3">Moves</h2>
+          <div class="section"></div>
+          <div class="columns is-multiline">
+           <% for (let move of pokemon.moves) { %>
+               <div class="column is-2">
+                  <a href="/move/<%= move.move.name %>" class="button"><%= move.move.name %></a>
+               </div>
+                   <% } %>
+                 </div>
+    </section>
         
    
 
