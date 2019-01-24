@@ -1,4 +1,5 @@
 const getData = require('../util/getData');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getItems = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -33,13 +34,7 @@ exports.getItem = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/item/${itemName}`;
   getData(apiUrl)
     .then(data => {
-      if(data.status === 404){
-        res.render('search-error', {
-           error:`Item with name ${itemName} wasn't found.Make sure that your search parameters are correct`,
-           path: '/search-error',
-           title: 'Search Error',
-         });
-       }
+      displaySearchErrorPage(data.status, 'Item', itemName, res);
       res.render('items/item', {
         path: '/item',
         title: data.name,

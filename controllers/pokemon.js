@@ -1,5 +1,6 @@
 const getData = require('../util/getData');
 const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getPokedex = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -39,13 +40,7 @@ exports.getPokemon = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   getData(apiUrl)
     .then(data => {
-      if (data.status === 404) {
-        res.render('search-error', {
-          error: `Pokemon with name ${pokemonName} wasn't found.Make sure that your search parameters are correct`,
-          path: '/search-error',
-          title: 'Search Error'
-        });
-      }
+      displaySearchErrorPage(data.status, 'Pokemon', pokemonName, res);
       const stats = data.stats.map(info => {
         return {
           statValue: info.base_stat,

@@ -1,4 +1,5 @@
 const getData = require('../util/getData');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getVersionGroups = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -29,13 +30,7 @@ exports.getVersionGroup = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/version-group/${versionGroupName}`;
   getData(apiUrl)
     .then(data => {
-      if(data.status === 404){
-        res.render('search-error', {
-           error:`Version Group with name ${versionGroupName} wasn't found.Make sure that your search parameters are correct`,
-           path: '/search-error',
-           title: 'Search Error',
-         });
-       }
+      displaySearchErrorPage(data.status, 'Version Group', versionGroupName, res);
       res.render('version-groups/version-group', {
         path: '/version-group',
         title: data.name,

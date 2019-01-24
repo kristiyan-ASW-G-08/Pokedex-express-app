@@ -1,5 +1,6 @@
 const getData = require('../util/getData');
 const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getPokedexes = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -30,13 +31,7 @@ exports.getPokedex = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/pokedex/${pokedexName}/`;
   getData(apiUrl)
     .then(data => {
-      if (data.status === 404) {
-        res.render('search-error', {
-          error: `Pokedex with name ${pokedexName} wasn't found.Make sure that your search parameters are correct`,
-          path: '/search-error',
-          title: 'Search Error'
-        });
-      }
+      displaySearchErrorPage(data.status, 'Pokedex', pokedexName, res);
       const pokedex = data.pokemon_entries.map(pokemon => {
             const pokemonId = getPokemonIdFromUrl(pokemon.pokemon_species.url);
             const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;

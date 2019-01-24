@@ -9,13 +9,13 @@
                 <div class="media-content">
                     <p class="title is-size-5">Version Group: <%= versionGroup.name %></p>
                     <p class="subtitle is-size-6">#<%= versionGroup.id %></p>
-                    <p class="title is-size-5 ">Pokedexes:  <% for (let pokedex of versionGroup.pokedexes) { %>
+                    <p class="subtitle is-size-6">Generation: <%= versionGroup.generation.name %></p>
+                    <p class="subtitle si-size-6 ">Pokedexes:  <% for (let pokedex of versionGroup.pokedexes) { %>
                         <a class="subtitle is-size-6" href="/pokedex/<%= pokedex.name %>" ><%= pokedex.name %></a> 
                     <% }  %> </p>
-                    <p class="title is-size-5 ">Regions:  <% for (let region of versionGroup.regions) { %>
+                    <p class="subtitle si-size-6 ">Regions:  <% for (let region of versionGroup.regions) { %>
                         <a class="subtitle is-size-6" href="/region/<%= region.name %>" ><%= region.name %></a> 
                     <% }  %> </p>     
-
                 </div>
               </div>
             </div>

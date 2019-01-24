@@ -1,5 +1,6 @@
 const getData = require('../util/getData');
 const getStringValue = require('../util/getStringValue');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getMoves = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -30,13 +31,7 @@ exports.getMove = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/move/${moveName}`;
   getData(apiUrl)
     .then(data => {
-      if(data.status === 404){
-        res.render('search-error', {
-           error:`Move with name ${moveName} wasn't found.Make sure that your search parameters are correct`,
-           path: '/search-error',
-           title: 'Search Error',
-         });
-       }
+      displaySearchErrorPage(data.status, 'Move', moveName, res);
       const stats = getStringValue(data);
       const move = {
         stats,

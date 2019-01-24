@@ -1,4 +1,5 @@
 const getData = require('../util/getData');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getRegions = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -29,13 +30,7 @@ exports.getRegion = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/region/${regionName}`;
   getData(apiUrl)
     .then(data => {
-      if(data.status === 404){
-        res.render('search-error', {
-           error:`Region with name ${regionName} wasn't found.Make sure that your search parameters are correct`,
-           path: '/search-error',
-           title: 'Search Error',
-         });
-       }
+      displaySearchErrorPage(data.status, 'Region', regionName, res);
       res.render('regions/region', {
         path: '/region',
         title: data.name,

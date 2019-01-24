@@ -1,5 +1,6 @@
 const getData = require('../util/getData');
 const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
+const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getPalParkAreas = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -31,13 +32,7 @@ exports.getPalParkArea = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/pal-park-area/${palParkAreaName}`;
   getData(apiUrl)
     .then(data => {
-      if (data.status === 404) {
-        res.render('search-error', {
-          error: `Pal Park Area with name ${palParkAreaName} wasn't found.Make sure that your search parameters are correct`,
-          path: '/search-error',
-          title: 'Search Error'
-        });
-      }
+      displaySearchErrorPage(data.status, 'Pal Park Area', palParkAreaName, res);
       const pokemonEncounters  = data.pokemon_encounters.map(pokemon => {
         const pokemonId = getPokemonIdFromUrl(pokemon.pokemon_species.url);;
           return {
