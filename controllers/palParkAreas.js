@@ -28,7 +28,6 @@ exports.getPalParkAreas = (req, res, next) => {
 };
 exports.getPalParkArea = (req, res, next) => {
   let { palParkAreaName } = req.params;
-  console.log(palParkAreaName)
   const apiUrl = `https://pokeapi.co/api/v2/pal-park-area/${palParkAreaName}`;
   getData(apiUrl)
     .then(data => {
@@ -40,7 +39,7 @@ exports.getPalParkArea = (req, res, next) => {
         });
       }
       const pokemonEncounters  = data.pokemon_encounters.map(pokemon => {
-        const pokemonId = getPokemonIdFromUrl(pokemon.url);;
+        const pokemonId = getPokemonIdFromUrl(pokemon.pokemon_species.url);;
           return {
               name:pokemon.pokemon_species.name,
               id:pokemonId,

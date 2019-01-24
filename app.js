@@ -35,7 +35,7 @@ app.use(itemsRouter)
 app.use(regionsRouter)
 app.use(searchRouter)
 process.on('unhandledRejection', (reason, p) => {
-  throw reason
+
 });
 
 app.use(errorController.get404);

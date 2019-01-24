@@ -16,6 +16,7 @@ exports.getPokedex = (req, res, next) => {
       const pokedex = data.results.map(pokemon => {
         const pokemonId = getPokemonIdFromUrl(pokemon.url);
         const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+        pokemon['id'] = pokemonId
         pokemon['spriteFront'] = spriteFront;
       
         return pokemon;

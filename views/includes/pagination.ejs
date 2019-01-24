@@ -1,0 +1,19 @@
+<div class="field is-grouped ">
+    <% if (previous) { %>
+      <div class="control ">
+          <form method="POST" action="<%= path %>" id="previous-form">
+            <input type="text" hidden value="<%= previous %></" name="previousPage">
+            <button type="button"class="button is-danger" id="previous-btn">Previous</button>
+          </form>
+      </div>
+      
+      <% }  %>
+    <% if (next) { %>
+      <div class="control">
+          <form method="POST" action="<%= path %>" id="next-form">
+            <input type="text" hidden value="<%= next %></" name="nextPage">
+            <button class="button is-danger" type="button" id="next-btn">Next</button>
+          </form>
+      </div>                         
+      <% }  %>
+      </div>     
