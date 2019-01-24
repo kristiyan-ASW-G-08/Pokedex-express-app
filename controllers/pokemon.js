@@ -16,15 +16,16 @@ exports.getPokedex = (req, res, next) => {
       const pokedex = data.results.map(pokemon => {
         const pokemonId = getPokemonIdFromUrl(pokemon.url);
         const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
-        pokemon['id'] = pokemonId
+        pokemon['id'] = pokemonId;
         pokemon['spriteFront'] = spriteFront;
-      
+
         return pokemon;
       });
       res.render('pokemon/pokedex', {
         pokedex,
         path: '/',
         title: 'Pokedex',
+        pokedexName: null,
         previous: data.previous,
         next: data.next
       });
@@ -52,19 +53,17 @@ exports.getPokemon = (req, res, next) => {
         };
       });
       const sprites = Object.entries(data.sprites).map(sprite => {
-        const spriteName = sprite[0].split('_').join(' ')
-        if(sprite[1]){
+        const spriteName = sprite[0].split('_').join(' ');
+        if (sprite[1]) {
           return {
             spriteName,
-            sprite:sprite[1]
-          }
+            sprite: sprite[1]
+          };
         }
-        
-        
       });
       data.stats = stats;
-      data.defaultSprite = data.sprites.front_default
-      data.sprites = sprites
+      data.defaultSprite = data.sprites.front_default;
+      data.sprites = sprites;
       res.render('pokemon/pokemon', {
         path: '/pokemon',
         title: data.name,

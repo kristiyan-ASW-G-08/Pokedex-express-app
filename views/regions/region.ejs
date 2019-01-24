@@ -10,7 +10,7 @@
                     <p class="title is-size-5">Region: <%= region.name %></p>
                     <p class="subtitle is-size-6">#<%= region.id %></p>
                     <p class="title is-size-5 ">Pokedexes:  <% for (let pokedex of region.pokedexes) { %>
-                      <a class="subtitle is-size-6"><%= pokedex.name %></a> 
+                      <a class="subtitle is-size-6" href="/pokedex/<%= pokedex.name %>" ><%= pokedex.name %></a> 
                   <% }  %> </p>     
                       <p class="title is-size-5 ">Versions:  <% for (let version of region.version_groups) { %>
                         <a class="subtitle is-size-6"><%= version.name %></a> 

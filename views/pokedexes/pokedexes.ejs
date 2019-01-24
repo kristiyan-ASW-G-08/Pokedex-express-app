@@ -1,0 +1,21 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+  
+  <body>
+      <%- include('../includes/navigation.ejs') %>
+    <section class="section">
+        <% if (pokedexes.length > 0) { %>
+          <div class="columns is-multiline">
+              <% for (let pokedex of pokedexes) { %>
+              <div class="column is-one-quarter">
+                    <a href="/pokedex/<%= pokedex.name %>" class="button"><%= pokedex.name %></a>
+              </div>
+                  <% } %>
+                  </div>
+                  <%- include('../includes/pagination.ejs') %>           
+          <% } else { %>
+              <h1>No Pal Park Areas Found!</h1>
+              <% } %>
+    </section>
+
+    <%- include('../includes/end.ejs') %>

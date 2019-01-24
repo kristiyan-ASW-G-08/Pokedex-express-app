@@ -2,6 +2,14 @@
     </head>
   <body>
       <%- include('../includes/navigation.ejs') %>
+      <% if (pokedexName ) { %>
+              <section class="section">
+                <div class="container has-text-centered">
+                    <h1 class="title is-size-3"><%= pokedexName %></h1>
+                </div>
+               
+              </section>
+        <% }  %>
     <section class="section">
         <% if (pokedex.length > 0) { %>
           <div class="columns is-multiline">
@@ -13,7 +21,6 @@
                             <img src="<%= pokemon.spriteFront %>" alt="Placeholder image">
                           </figure>
                         </div>
-                     
                       <div class="card-content is-flex">
                         <div class="media">
                           <div class="media-content">
@@ -28,7 +35,6 @@
               </div>
                   <% } %>
                   </div>
-                          
        <%- include('../includes/pagination.ejs') %>     
           <% } else { %>
               <h1>No Pokemon Found!</h1>

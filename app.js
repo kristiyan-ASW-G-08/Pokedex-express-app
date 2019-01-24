@@ -3,7 +3,8 @@ const path = require('path');
 
 const sassMiddleware = require('node-sass-middleware');
 
-const pokedexRouter = require('./routes/pokedex');
+const pokemonROuter = require('./routes/pokemon');
+const pokedexRouter = require('./routes/pokedexes')
 const searchRouter = require('./routes/search')
 const berriesRouter = require('./routes/berries')
 const movesRouter = require('./routes/moves')
@@ -27,13 +28,14 @@ app.use(sassMiddleware({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(pokedexRouter)
+app.use(pokemonROuter)
 app.use(berriesRouter)
 app.use(movesRouter)
 app.use(palParkAreasRouter)
 app.use(itemsRouter)
 app.use(regionsRouter)
 app.use(searchRouter)
+app.use(pokedexRouter)
 process.on('unhandledRejection', (reason, p) => {
 
 });
