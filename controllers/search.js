@@ -30,6 +30,9 @@ exports.search = (req, res, next) => {
     case 'Region':
       redirectUrl = `/region/${name}/`;
       break;
+      case 'Version':
+      redirectUrl = `/version/${name}/`;
+      break;
     default:
       redirectUrl = `/404`;
   }
