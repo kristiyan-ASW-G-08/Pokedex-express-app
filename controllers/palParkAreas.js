@@ -16,7 +16,7 @@ exports.getPalParkAreas = (req, res, next) => {
       
       res.render('palParkAreas/palParkAreas', {
         palParkAreas:data.results,
-        path: '/',
+        path: '/pal-park-areas',
         title: 'Pal Park Areas',
         previous: data.previous,
         next: data.next

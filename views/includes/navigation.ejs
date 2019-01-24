@@ -3,9 +3,14 @@
     <a class="navbar-item" href="https://pokeapi.co/" target="_blank">
       PokeAPI
     </a>
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
+      <span aria-hidden="true"></span> <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
@@ -15,27 +20,55 @@
       <a class="navbar-item  <%= path === '/' ? 'is-active' : '' %>" href="/">
         Pokemon
       </a>
-      <a class="navbar-item <%= path === '/berries' ? 'is-active' : '' %>" href="/berries">
+      <a
+        class="navbar-item <%= path === '/berries' ? 'is-active' : '' %>"
+        href="/berries"
+      >
         Berries
       </a>
-      <a class="navbar-item  <%= path === '/moves' ? 'is-active' : '' %>" href="/moves">
+      <a
+        class="navbar-item  <%= path === '/moves' ? 'is-active' : '' %>"
+        href="/moves"
+      >
         Moves
       </a>
-      <a class="navbar-item  <%= path === '/items' ? 'is-active' : '' %>" href="/items">
+      <a
+        class="navbar-item  <%= path === '/items' ? 'is-active' : '' %>"
+        href="/items"
+      >
         Items
       </a>
-      <a class="navbar-item  <%= path === '/pal-park-areas' ? 'is-active' : '' %>" href="/pal-park-areas">
-        Pal Park Areas
-      </a>
-      <a class="navbar-item  <%= path === '/regions' ? 'is-active' : '' %>" href="/regions">
-        Regions
-      </a>
-      <a class="navbar-item  <%= path === '/pokedexes' ? 'is-active' : '' %>" href="/pokedexes">
-        Pokedexes
-      </a>
-      <a class="navbar-item  <%= path === '/search' ? 'is-active' : '' %>" href="/search">
-          Search
-        </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link"> More </a>
+        <div class="navbar-dropdown">
+          <a
+            class="navbar-item  <%= path === '/pal-park-areas' ? 'is-active' : '' %>"
+            href="/pal-park-areas"
+          >
+            Pal Park Areas
+          </a>
+          <a
+            class="navbar-item  <%= path === '/regions' ? 'is-active' : '' %>"
+            href="/regions"
+          >
+            Regions
+          </a>
+          <a
+            class="navbar-item  <%= path === '/pokedexes' ? 'is-active' : '' %>"
+            href="/pokedexes"
+          >
+            Pokedexes
+          </a>
+          <hr class="navbar-divider">
+          <a
+            class="navbar-item  <%= path === '/search' ? 'is-active' : '' %>"
+            href="/search"
+          >
+            Search
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
