@@ -9,7 +9,7 @@
                 <div class="media-content">
                     <p class="title is-size-5">Version: <%= version.name %></p>
                     <p class="subtitle is-size-6">#<%= version.id %></p>
-                    <p class="subtitle is-size-6">Version Group: <%= version.version_group.name %></p>
+                    <p class="subtitle is-size-6">Version Group: <a href="/version-group/<%= version.version_group.name %>" ><%= version.version_group.name %></a></p>
                 </div>
               </div>
             </div>

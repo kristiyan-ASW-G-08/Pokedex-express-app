@@ -33,6 +33,9 @@ exports.search = (req, res, next) => {
       case 'Version':
       redirectUrl = `/version/${name}/`;
       break;
+      case 'Version Group':
+      redirectUrl = `/version-group/${name}/`;
+      break;
     default:
       redirectUrl = `/404`;
   }
