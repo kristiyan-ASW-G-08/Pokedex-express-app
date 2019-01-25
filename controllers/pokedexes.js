@@ -14,8 +14,9 @@ exports.getPokedexes = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('pokedexes/pokedexes', {
-        pokedexes:data.results,
+      res.render('list-page', {
+        itemName:'pokedex',
+        items: data.results,
         path: '/pokedexes',
         title: 'Pokedexes',
         previous: data.previous,

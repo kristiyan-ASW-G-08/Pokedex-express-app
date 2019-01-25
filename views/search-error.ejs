@@ -2,12 +2,9 @@
 </head>
 <body>
     <%- include('includes/navigation.ejs') %>
-  <section class="section">
-      <div class="container has-text-centered">
-            <h1 class="title is-size-1">Search Error</h1>
-            <h2 class="subtitle is-size-4"><%= error %></h2>
-      </div>
-      
+    <%- include('./includes/page-title.ejs') %>
+  <section class="section has-text-centered">
+        <h2 class="subtitle is-size-4"><%= error %></h2>
   </section>
 
 <%- include('includes/end.ejs') %>

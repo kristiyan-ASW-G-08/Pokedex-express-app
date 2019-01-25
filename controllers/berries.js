@@ -14,8 +14,9 @@ exports.getBerries = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('berries/berries', {
-        berries: data.results,
+      res.render('list-page', {
+        itemName:'berry',
+        items: data.results,
         path: '/berries',
         title: 'Berries',
         previous: data.previous,

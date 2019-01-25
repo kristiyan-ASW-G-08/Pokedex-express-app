@@ -2,6 +2,7 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/page-title.ejs') %>
     <section class="section">
       <div class="columns is-multiline">
         <div class="column is-one-third">
@@ -15,7 +16,6 @@
                   
                 </div>
                 <div class="media-content">
-                  <p class="title is-size-5"><%= pokemon.name %> </p>
                   <p class="subtitle is-size-6">#<%= pokemon.id %></p>
                   <p class="subtitle is-size-6">Height: <%= pokemon.height %></p>
                   <p class="subtitle is-size-6">Weight: <%= pokemon.weight %></p>

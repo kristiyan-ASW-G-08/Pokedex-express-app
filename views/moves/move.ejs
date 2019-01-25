@@ -2,12 +2,13 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/page-title.ejs') %>
     <section class="section">
             <div class="card">
                     <div class="card-content">
                       <div class="media">
                         <div class="media-content">
-                          <p class="title is-size-5"><%= move.name %></p>
+
                           <p class="title is-size-6">Effect: <%= move.effect_entries[0].effect %></p>
                           <p class="title is-size-6">Short Effect: <%=  move.effect_entries[0].short_effect %></p>            
                   <% for (let stat of move.stats) { %>

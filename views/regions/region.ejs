@@ -2,12 +2,12 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/page-title.ejs') %>
     <section class="section">
         <div class="card">
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                    <p class="title is-size-5">Region: <%= region.name %></p>
                     <p class="subtitle is-size-6">#<%= region.id %></p>
                     <p class="title is-size-5 ">Pokedexes:  <% for (let pokedex of region.pokedexes) { %>
                       <a class="subtitle is-size-6" href="/pokedex/<%= pokedex.name %>" ><%= pokedex.name %></a> 

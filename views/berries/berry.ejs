@@ -2,21 +2,19 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/page-title.ejs') %>
     <section class="section">
           <div class="card">
             <div class="card-content">
               <div class="media">
                 <div class="media-content">
-                    <p class="title is-size-5">Name: <%= berry.name %></p>
                     <p class="subtitle is-size-6">#<%= berry.id %></p> 
-                       
                   <% for (let stat of berry.stats) { %>
                     <% if (stat) { %>
                         <p class="subtitle is-size-6"><%= stat.name %>: <%= stat.value %></p>    
                         <% }  %>
-                   
                     <% }  %> 
-                    <p class="title is-size-5 ">Flavors:  <% for (let flavor of berry.flavors) { %>
+                    <p class="title is-size-6 ">Flavors:  <% for (let flavor of berry.flavors) { %>
                       <a class="subtitle is-size-6"><%= flavor.flavor.name %></a> 
                   <% }  %> </p>      
                 

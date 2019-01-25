@@ -13,10 +13,11 @@ exports.getRegions = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('regions/regions', {
-        regions: data.results,
+      res.render('list-page', {
+        itemName:'region',
+        items: data.results,
         path: '/regions',
-        title: 'regions',
+        title: 'Regions',
         previous: data.previous,
         next: data.next
       });

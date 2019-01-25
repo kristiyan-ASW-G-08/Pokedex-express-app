@@ -1,6 +1,7 @@
 const getData = require('../util/getData');
 const processPokemonList = require('../util/processPokemonList');
 const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const getStringValue = require('../util/getStringValue');
 exports.getTypes = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -14,8 +15,9 @@ exports.getTypes = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('types/types', {
-        types: data.results,
+      res.render('list-page', {
+        itemName: 'type',
+        items: data.results,
         path: '/types',
         title: 'Types',
         previous: data.previous,
@@ -31,17 +33,31 @@ exports.getType = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/type/${typeName}`;
   getData(apiUrl)
     .then(data => {
-
       displaySearchErrorPage(data.status, 'Type', typeName, res);
       const pokemonList = processPokemonList(data.pokemon);
+      const damageRelations = Object.entries(data.damage_relations).map(
+        damageRelation => {
+          const editedDamageRelation = {};
+          editedDamageRelation['name'] = damageRelation[0].split('_').join(' ');
+          if (damageRelation[1].length !== 0) {
+            editedDamageRelation['types'] = damageRelation[1];
+            return editedDamageRelation;
+          }
+        }
+      );
       res.render('types/type', {
         pokemonList,
+        itemName: 'move',
+        items: data.moves,
         path: '/type',
+        damageRelations,
         title: data.name,
-        type: data
+        type: data,
+        previous: null,
+        next: null
       });
     })
     .catch(error => {
-      throw new Error(error)
+      throw new Error(error);
     });
 };

@@ -13,8 +13,9 @@ exports.getVersions = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('versions/versions', {
-        versions: data.results,
+      res.render('list-page', {
+        itemName:'version',
+        items: data.results,
         path: '/versions',
         title: 'Versions',
         previous: data.previous,

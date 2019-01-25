@@ -1,14 +1,15 @@
+
 <section class="section">
-    <% if (item.length > 0) { %>
+    <% if (items.length > 0) { %>
       <div class="columns is-multiline">
-        <% for (let item of item) { %>
-            <div class="column is-one-quarter">
+        <% for (let item of items) { %>
+            <div class="column is-one-fifth">
                <a href="/<%= itemName %>/<%= item.name %>" class="button"><%= item.name %></a>
             </div>
                 <% } %>
-              </div>
-                 <%- include('../includes/pagination.ejs') %>                 
+              </div>             
       <% } else { %>
-          <h1>No <%= itemNamePlural %> Found!</h1>
-          <% } %>
+          <h1>No <%= title %> Found!</h1>
+          <% } %> 
 </section>
+<%- include('../includes/pagination.ejs') %>    

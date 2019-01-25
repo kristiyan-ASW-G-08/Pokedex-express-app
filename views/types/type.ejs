@@ -2,15 +2,24 @@
     </head>
   <body>
       <%- include('../includes/navigation.ejs') %>
+      <%- include('../includes/page-title.ejs') %>
               <section class="section">
                     <div class="card">
                             <div class="card-content">
                               <div class="media">
                                 <div class="media-content">
-                                  <p class="title is-size-5">type:<%= type.name %></p>
                                   <p class="subtitle is-size-6">#<%= type.id %></p>
-                                  <p class="subtitle is-size-6">Generation: <%= type.generation.name %></p>
-  
+                                  <p class="subtitle is-size-6">Generation: <a href="/generation/<%= type.generation.name %>" ><%= type.generation.name %></a></p>
+                                  <% for (let damageRelation of damageRelations) { %>
+                                    <% if (damageRelation) { %>
+                                        <p class="subtitle is-size-6"><%= damageRelation.name %>:
+                                          
+                                          <% for (let type of damageRelation.types) { %>
+                                            <a href="/type/<%= type.name %>" ><%= type.name %></a>
+                                            <% }  %> 
+                                        </p>    
+                                        <% }  %>
+                                    <% }  %> 
                                 </div>
                               </div>
                             </div>
@@ -18,25 +27,14 @@
     <section class="section">
       <div class="box">
           <h2 class="title is-size-3 has-text-centered">Pokemon Species</h2>
-          <%- include('../includes/pokemonList.ejs') %>
       </div>
     </section>
+    <%- include('../includes/pokemonList.ejs') %>
     <section class="section">
         <div class="box">
             <h2 class="title is-size-3 has-text-centered">Moves</h2>
         </div>
-        <% if (type.moves.length > 0) { %>
-          <div class="columns is-multiline">
-            <% for (let move of type.moves) { %>
-                <div class="column is-two">
-                   <a href="/move/<%= move.name %>" class="button"><%= move.name %></a>
-                </div>
-                    <% } %>
-                  </div>
-                             
-          <% } else { %>
-              <h1>No Moves Found!</h1>
-              <% } %>
     </section>
+    <%- include('../includes/item-list.ejs') %>
 
     <%- include('../includes/end.ejs') %>

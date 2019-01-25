@@ -14,8 +14,9 @@ exports.getMoves = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('moves/moves', {
-        moves: data.results,
+      res.render('list-page', {
+        itemName: 'move',
+        items: data.results,
         path: '/moves',
         title: 'Moves',
         previous: data.previous,

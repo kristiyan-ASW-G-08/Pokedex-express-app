@@ -2,12 +2,8 @@
     </head>
   <body>
       <%- include('../includes/navigation.ejs') %>
+      <%- include('../includes/page-title.ejs') %>
       <% if (pokedexName ) { %>
-              <section class="section">
-                <div class="container has-text-centered">
-                    <h1 class="title is-size-3"><%= pokedexName %></h1>
-                </div>
-              </section>
         <% }  %>
         <%- include('../includes/pokemonList.ejs') %>
         <%- include('../includes/pagination.ejs') %>     

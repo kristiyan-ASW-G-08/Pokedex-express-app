@@ -14,8 +14,9 @@ exports.getGenerations = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('generations/generations', {
-        generations: data.results,
+      res.render('list-page', {
+        itemName:'generation',
+        items: data.results,
         path: '/generations',
         title: 'Generations',
         previous: data.previous,

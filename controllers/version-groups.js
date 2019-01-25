@@ -13,8 +13,9 @@ exports.getVersionGroups = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      res.render('version-groups/version-groups', {
-        versionGroups: data.results,
+      res.render('list-page', {
+        itemName:'version-group',
+        items: data.results,
         path: '/version-groups',
         title: 'Version Groups',
         previous: data.previous,

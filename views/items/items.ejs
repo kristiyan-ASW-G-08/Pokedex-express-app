@@ -3,12 +3,12 @@
   
   <body>
       <%- include('../includes/navigation.ejs') %>
+      <%- include('../includes/page-title.ejs') %>
     <section class="section">
         <% if (items.length > 0) { %>
           <div class="columns is-multiline">
               <% for (let item of items) { %>
-              <div class="column is-one-quarter">
-                  
+              <div class="column is-one-quarter">                  
                   <div class="card">
                       <div class="card-content">
                         <div class="media">
@@ -27,10 +27,10 @@
               </div>
                   <% } %>
                   </div>
-                  <%- include('../includes/pagination.ejs') %>               
+                        
           <% } else { %>
-              <h1>No Berries Found!</h1>
+              <h1>No Items Found!</h1>
               <% } %>
     </section>
-
+    <%- include('../includes/pagination.ejs') %>       
     <%- include('../includes/end.ejs') %>
