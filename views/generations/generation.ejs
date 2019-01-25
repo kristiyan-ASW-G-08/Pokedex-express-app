@@ -1,0 +1,71 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+  <body>
+      <%- include('../includes/navigation.ejs') %>
+              <section class="section">
+                    <div class="card">
+                            <div class="card-content">
+                              <div class="media">
+                                <div class="media-content">
+                                  <p class="title is-size-5">Generation:<%= generation.name %></p>
+                                  <p class="subtitle is-size-6">#<%= generation.id %></p>
+                                  <p class="subtitle is-size-6">Main Region:  <a class="is-link" href="/region/<%= generation.main_region.name%>" ><%= generation.main_region.name %></a> </p>
+                                  <p class="subtitle is-size-6 ">Version Groups:  <% for (let versionGroup of generation.version_groups) { %>
+                                    <a href="/version-group/<%= versionGroup.name %>" ><%= versionGroup.name %></a> 
+                                <% }  %> </p>     
+                                </div>
+                              </div>
+                            </div>
+              </section>
+    <section class="section">
+      <div class="box">
+          <h2 class="title is-size-3 has-text-centered">Pokemon Species</h2>
+      </div>
+        <% if (generation.pokemon_species.length > 0) { %>
+          <div class="columns is-multiline">
+              <% for (let pokemon of generation.pokemon_species) { %>
+              <div class="column is-one-quarter">
+                  <div class="card is-flex">
+                      <div class="card-image">
+                          <figure class="image ">
+                            <img src="<%= pokemon.spriteFront %>" alt="Placeholder image">
+                          </figure>
+                        </div>
+                      <div class="card-content is-flex">
+                        <div class="media">
+                          <div class="media-content">
+                            <p class="title is-4"><%= pokemon.name %></p>
+                            <p class="title is-4">#<%= pokemon.id %></p>
+                            <p><a href="/pokemon/<%= pokemon.name %>" class="is-link is-primary">Learn More</a></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+              </div>
+                  <% } %>
+                  </div>
+
+          <% } else { %>
+              <h1>No Pokemon Found!</h1>
+              <% } %>
+    </section>
+    <section class="section">
+        <div class="box">
+            <h2 class="title is-size-3 has-text-centered">Moves</h2>
+        </div>
+        <% if (generation.moves.length > 0) { %>
+          <div class="columns is-multiline">
+            <% for (let move of generation.moves) { %>
+                <div class="column is-two">
+                   <a href="/move/<%= move.name %>" class="button"><%= move.name %></a>
+                </div>
+                    <% } %>
+                  </div>
+                             
+          <% } else { %>
+              <h1>No Moves Found!</h1>
+              <% } %>
+    </section>
+
+    <%- include('../includes/end.ejs') %>

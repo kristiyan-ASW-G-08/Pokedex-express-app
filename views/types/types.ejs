@@ -4,17 +4,17 @@
   <body>
       <%- include('../includes/navigation.ejs') %>
     <section class="section">
-        <% if (moves.length > 0) { %>
+        <% if (types.length > 0) { %>
           <div class="columns is-multiline">
-            <% for (let move of moves) { %>
+            <% for (let type of types) { %>
                 <div class="column is-one-quarter">
-                   <a href="/move/<%= move.name %>" class="button"><%= move.name %></a>
+                   <a href="/type/<%= type.name %>" class="button"><%= type.name %></a>
                 </div>
                     <% } %>
                   </div>
                      <%- include('../includes/pagination.ejs') %>                 
           <% } else { %>
-              <h1>No Moves Found!</h1>
+              <h1>No Types Found!</h1>
               <% } %>
     </section>
 

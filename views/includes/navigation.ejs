@@ -41,6 +41,12 @@
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link"> More </a>
         <div class="navbar-dropdown">
+            <a
+            class="navbar-item  <%= path === '/generations' ? 'is-active' : '' %>"
+            href="/generations"
+          >
+            Generations
+          </a>
           <a
             class="navbar-item  <%= path === '/pal-park-areas' ? 'is-active' : '' %>"
             href="/pal-park-areas"
@@ -71,6 +77,12 @@
           >
             Verson Groups
           </a>
+          <a
+          class="navbar-item  <%= path === '/types' ? 'is-active' : '' %>"
+          href="/types"
+        >
+          Types
+        </a>
           <hr class="navbar-divider">
           <a
             class="navbar-item  <%= path === '/search' ? 'is-active' : '' %>"

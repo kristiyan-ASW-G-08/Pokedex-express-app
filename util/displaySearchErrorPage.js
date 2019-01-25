@@ -1,5 +1,4 @@
 const displaySearchErrorPage = (status, sectionName, itemName,res) => {
-  console.log('wtf')
   if (status === 404) {
     res.render('search-error', {
       error: `${sectionName} with name ${itemName} wasn't found.Make sure that your search parameters are correct`,
