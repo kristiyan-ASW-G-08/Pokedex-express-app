@@ -3,18 +3,24 @@
 <body>
     <%- include('includes/navigation.ejs') %>
     <section class="section">
+        <% if (errorMsg) { %>
+             <div class="notification is-danger">
+                 <p><%= errorMsg %></p>
+               </div>
+
+             <% }  %> 
            <form action="/search" method="POST">
                 <div class="field">
                         <label class="label">Name</label>
                         <div class="control">
-                          <input class="input" type="text" placeholder="Text input" required name="name">
+                          <input class="input  <%= errorsArr.find(e => e.param === 'name') ? 'is-danger' : '' %>" type="text" placeholder="Text input" name="name" required>
                         </div>
                       </div>
                       <div class="field">
-                        <label class="label">Subject</label>
+                        <label class="label">Category</label>
                         <div class="control">
-                          <div class="select">
-                            <select name="subject" required>
+                          <div class="select <%= errorsArr.find(e => e.param === 'category') ? 'is-danger' : '' %>">
+                            <select name="category" required>
                               <option>Pokemon</option>
                               <option >Berry</option>
                               <option >Item</option>
