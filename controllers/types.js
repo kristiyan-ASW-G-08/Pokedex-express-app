@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const getStringValue = require('../util/getStringValue');
+const processPokemonList = require('../util/processPokemonList');
 const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getTypes = (req, res, next) => {
   let apiUrl;
@@ -29,17 +29,19 @@ exports.getTypes = (req, res, next) => {
 exports.getType = (req, res, next) => {
   let { typeName } = req.params;
   const apiUrl = `https://pokeapi.co/api/v2/type/${typeName}`;
-  console.log(apiUrl);
   getData(apiUrl)
     .then(data => {
+
       displaySearchErrorPage(data.status, 'Type', typeName, res);
+      const pokemonList = processPokemonList(data.pokemon);
       res.render('types/type', {
+        pokemonList,
         path: '/type',
         title: data.name,
-        type:data
+        type: data
       });
     })
     .catch(error => {
-      throw error;
+      throw new Error(error)
     });
 };

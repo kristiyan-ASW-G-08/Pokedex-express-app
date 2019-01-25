@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
+const processPokemonList = require('../util/processPokemonList');
 const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getPokedex = (req, res, next) => {
   let apiUrl;
@@ -14,16 +14,9 @@ exports.getPokedex = (req, res, next) => {
   }
   getData(apiUrl)
     .then(data => {
-      const pokedex = data.results.map(pokemon => {
-        const pokemonId = getPokemonIdFromUrl(pokemon.url);
-        const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
-        pokemon['id'] = pokemonId;
-        pokemon['spriteFront'] = spriteFront;
-
-        return pokemon;
-      });
-      res.render('pokemon/pokedex', {
-        pokedex,
+     const pokemonList = processPokemonList(data.results)
+      res.render('pokedexes/pokedex', {
+        pokemonList,
         path: '/',
         title: 'Pokedex',
         pokedexName: null,

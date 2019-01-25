@@ -18,35 +18,8 @@
     <section class="section">
       <div class="box">
           <h2 class="title is-size-3 has-text-centered">Pokemon Species</h2>
+          <%- include('../includes/pokemonList.ejs') %>
       </div>
-        <% if (type.pokemon.length > 0) { %>
-          <div class="columns is-multiline">
-              <% for (let pokemon of type.pokemon) { %>
-              <div class="column is-one-quarter">
-                  <div class="card is-flex">
-                      <div class="card-image">
-                          <figure class="image ">
-                            <img src="<%= pokemon.spriteFront %>" alt="Placeholder image">
-                          </figure>
-                        </div>
-                      <div class="card-content is-flex">
-                        <div class="media">
-                          <div class="media-content">
-                            <p class="title is-4"><%= pokemon.name %></p>
-                            <p class="title is-4">#<%= pokemon.id %></p>
-                            <p><a href="/pokemon/<%= pokemon.name %>" class="is-link is-primary">Learn More</a></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-              </div>
-                  <% } %>
-                  </div>
-
-          <% } else { %>
-              <h1>No Pokemon Found!</h1>
-              <% } %>
     </section>
     <section class="section">
         <div class="box">

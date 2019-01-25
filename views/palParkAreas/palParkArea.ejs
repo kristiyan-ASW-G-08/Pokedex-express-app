@@ -4,38 +4,8 @@
     <%- include('../includes/navigation.ejs') %>
     <section class="section">
         <div class="container has-text-centered">
-          <h1 class="title is-size-4"><%= palParkArea.name %></h1>
-        </div>
-        <div class="columns is-multiline">
-            <% for (let pokemon of palParkArea.pokemonEncounters) { %>
-              <div class="column is-one-quarter">
-                  <div class="card is-flex">
-                      <div class="card-image">
-                          <figure class="image is-4by3">
-                            <img src="<%= pokemon.spriteFront %>" alt="Placeholder image">
-                          </figure>
-                        </div>
-                     
-                      <div class="card-content is-flex">
-                        <div class="media">
-                          <div class="media-content">
-                            <p class="title is-size-5"><%= pokemon.name %></p>
-                            <p class="title is-size-6">#<%= pokemon.id %></p>
-                            <p class="title is-size-6">Base Score: <%= pokemon.baseScore %></p>
-                            <p class="title is-size-6">Rate: <%= pokemon.rate %></p>
-                            <p><a href="/pokemon/<%= pokemon.name %>" class="is-link is-primary">Learn More</a></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-              </div>
-                  <% } %>
+          <h1 class="title is-size-4"><%= palParkAreaName %></h1>
         </div>
     </section>
-    
-
-        
-   
-
+    <%- include('../includes/pokemonList.ejs') %>
 <%- include('../includes/end.ejs') %>

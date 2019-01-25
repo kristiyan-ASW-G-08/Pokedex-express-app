@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
+const processPokemonList = require('../util/processPokemonList');
 const displaySearchErrorPage = require('../util/displaySearchErrorPage');
 exports.getPalParkAreas = (req, res, next) => {
   let apiUrl;
@@ -33,26 +33,12 @@ exports.getPalParkArea = (req, res, next) => {
   getData(apiUrl)
     .then(data => {
       displaySearchErrorPage(data.status, 'Pal Park Area', palParkAreaName, res);
-      const pokemonEncounters  = data.pokemon_encounters.map(pokemon => {
-        const pokemonId = getPokemonIdFromUrl(pokemon.pokemon_species.url);;
-          return {
-              name:pokemon.pokemon_species.name,
-              id:pokemonId,
-              spriteFront:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
-              baseScore:pokemon.base_score,
-              rate:pokemon.rate
-            
-          }
-      })
-      const palParkArea = {
-          name:data.name,
-          pokemonEncounters
-          
-      }
+      const pokemonList  =processPokemonList(data.pokemon_encounters)
       res.render('palParkAreas/palParkArea', {
         path: '/pal-park-area',
         title: data.name,
-        palParkArea
+        pokemonList,
+        palParkAreaName : data.name
       });
     })
     .catch(error => {
