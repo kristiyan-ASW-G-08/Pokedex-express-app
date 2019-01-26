@@ -1,7 +1,6 @@
 const getData = require('../util/getData');
 const processPokemonList = require('../util/processPokemonList');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
-const getStringValue = require('../util/getStringValue');
+const error = require('../util/error')
 exports.getTypes = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -33,7 +32,6 @@ exports.getType = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/type/${typeName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Type', typeName, res);
       const pokemonList = processPokemonList(data.pokemon);
       const damageRelations = Object.entries(data.damage_relations).map(
         damageRelation => {
@@ -57,7 +55,7 @@ exports.getType = (req, res, next) => {
         next: null
       });
     })
-    .catch(error => {
-      throw new Error(error);
+    .catch(err => {
+      error(err)
     });
 };

@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getItems = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -34,14 +34,13 @@ exports.getItem = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/item/${itemName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Item', itemName, res);
       res.render('items/item', {
         path: '/item',
         title: data.name,
         data
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+     error(err)
     });
 };

@@ -1,6 +1,6 @@
 const getData = require('../util/getData');
 const processPokemonList = require('../util/processPokemonList');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getPokedex = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -33,7 +33,6 @@ exports.getPokemon = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Pokemon', pokemonName, res);
       const stats = data.stats.map(info => {
         return {
           statValue: info.base_stat,
@@ -58,7 +57,7 @@ exports.getPokemon = (req, res, next) => {
         pokemon: data
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

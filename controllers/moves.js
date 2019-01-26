@@ -1,6 +1,6 @@
 const getData = require('../util/getData');
 const getStringValue = require('../util/getStringValue');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getMoves = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -32,7 +32,6 @@ exports.getMove = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/move/${moveName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Move', moveName, res);
       const stats = getStringValue(data);
       const move = {
         stats,
@@ -45,7 +44,7 @@ exports.getMove = (req, res, next) => {
         move
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

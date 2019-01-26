@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getVersions = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -31,15 +31,13 @@ exports.getVersion = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/version/${versionName}`
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Version', versionName, res);
-
       res.render('versions/version', {
         path: '/version',
         title: data.name,
         version:data
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

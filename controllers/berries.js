@@ -1,6 +1,6 @@
 const getData = require('../util/getData');
 const getStringValue = require('../util/getStringValue');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getBerries = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -33,7 +33,6 @@ exports.getBerry = (req, res, next) => {
   console.log(apiUrl);
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Berry', berryName, res);
       const stats = getStringValue(data);
       const berry = {
         name: data.name,
@@ -47,7 +46,7 @@ exports.getBerry = (req, res, next) => {
         berry
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

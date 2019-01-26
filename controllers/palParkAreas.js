@@ -1,6 +1,6 @@
 const getData = require('../util/getData');
 const processPokemonList = require('../util/processPokemonList');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getPalParkAreas = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -33,7 +33,7 @@ exports.getPalParkArea = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/pal-park-area/${palParkAreaName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Pal Park Area', palParkAreaName, res);
+
       const pokemonList  =processPokemonList(data.pokemon_encounters)
       res.render('palParkAreas/palParkArea', {
         path: '/pal-park-area',
@@ -42,7 +42,7 @@ exports.getPalParkArea = (req, res, next) => {
         palParkAreaName : data.name
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

@@ -1,6 +1,6 @@
 const getData = require('../util/getData');
 const getPokemonIdFromUrl = require('../util/getPokemonIdFromUrl');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getGenerations = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -32,7 +32,6 @@ exports.getGeneration = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/generation/${generationName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Generation', generationName, res);
       const pokemon_species = data.pokemon_species.map(pokemon => {
         const pokemonId = getPokemonIdFromUrl(pokemon.url);
         const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
@@ -47,7 +46,7 @@ exports.getGeneration = (req, res, next) => {
         generation:data,
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

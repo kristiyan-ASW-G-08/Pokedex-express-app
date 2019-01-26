@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getRegions = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -31,14 +31,13 @@ exports.getRegion = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/region/${regionName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Region', regionName, res);
       res.render('regions/region', {
         path: '/region',
         title: data.name,
         region:data
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

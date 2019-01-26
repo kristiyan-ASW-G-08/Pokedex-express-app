@@ -1,5 +1,5 @@
 const getData = require('../util/getData');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getVersionGroups = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -31,14 +31,14 @@ exports.getVersionGroup = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/version-group/${versionGroupName}`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Version Group', versionGroupName, res);
+
       res.render('version-groups/version-group', {
         path: '/version-group',
         title: data.name,
         versionGroup:data
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };

@@ -1,6 +1,6 @@
 const getData = require('../util/getData');
 const processPokemonList = require('../util/processPokemonList');
-const displaySearchErrorPage = require('../util/displaySearchErrorPage');
+const error = require('../util/error')
 exports.getPokedexes = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -32,7 +32,6 @@ exports.getPokedex = (req, res, next) => {
   const apiUrl = `https://pokeapi.co/api/v2/pokedex/${pokedexName}/`;
   getData(apiUrl)
     .then(data => {
-      displaySearchErrorPage(data.status, 'Pokedex', pokedexName, res);
       const pokemonList = processPokemonList(data.pokemon_entries)
       res.render('pokedexes/pokedex', {
         path: '/pokedex',
@@ -43,7 +42,7 @@ exports.getPokedex = (req, res, next) => {
         next: data.next
       });
     })
-    .catch(error => {
-      throw error;
+    .catch(err => {
+      error(err)
     });
 };
