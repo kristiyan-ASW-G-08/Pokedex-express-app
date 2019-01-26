@@ -1,6 +1,5 @@
-const getData = require('../util/getData');
-const processPokemonList = require('../util/processPokemonList');
-const error = require('../util/error')
+const redisCache = require('../util/redisCache');
+const renderFunctions = require('../renderFunctions/types');
 exports.getTypes = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -12,50 +11,10 @@ exports.getTypes = (req, res, next) => {
   } else {
     apiUrl = 'https://pokeapi.co/api/v2/type/';
   }
-  getData(apiUrl)
-    .then(data => {
-      res.render('list-page', {
-        itemName: 'type',
-        items: data.results,
-        path: '/types',
-        title: 'Types',
-        previous: data.previous,
-        next: data.next
-      });
-    })
-    .catch(error => {
-      throw error;
-    });
+  redisCache(apiUrl, res, next, renderFunctions.typesRender);
 };
 exports.getType = (req, res, next) => {
   let { typeName } = req.params;
   const apiUrl = `https://pokeapi.co/api/v2/type/${typeName}`;
-  getData(apiUrl)
-    .then(data => {
-      const pokemonList = processPokemonList(data.pokemon);
-      const damageRelations = Object.entries(data.damage_relations).map(
-        damageRelation => {
-          const editedDamageRelation = {};
-          editedDamageRelation['name'] = damageRelation[0].split('_').join(' ');
-          if (damageRelation[1].length !== 0) {
-            editedDamageRelation['types'] = damageRelation[1];
-            return editedDamageRelation;
-          }
-        }
-      );
-      res.render('types/type', {
-        pokemonList,
-        itemName: 'move',
-        items: data.moves,
-        path: '/type',
-        damageRelations,
-        title: data.name,
-        type: data,
-        previous: null,
-        next: null
-      });
-    })
-    .catch(err => {
-      error(err)
-    });
+  redisCache(apiUrl, res, next, renderFunctions.typeRender);
 };

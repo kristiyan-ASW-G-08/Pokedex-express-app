@@ -2,17 +2,17 @@
   "name": "express-pokedex-app",
   "version": "0.0.0",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": " nodemon  app.js",
     "start-server": "node app.js"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
     "bulma": "^0.7.2",
     "ejs": "~2.5.7",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "node-fetch": "^2.3.0",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

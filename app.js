@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express');
 const path = require('path');
 
@@ -45,7 +46,7 @@ app.use(regionsRouter)
 app.use(searchRouter)
 app.use(pokedexRouter)
 process.on('unhandledRejection', (reason, p) => {
-
+  console.log(reason)
 });
 
 app.use(errorController.get404);

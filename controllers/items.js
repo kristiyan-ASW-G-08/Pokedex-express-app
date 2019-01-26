@@ -1,5 +1,5 @@
-const getData = require('../util/getData');
-const error = require('../util/error')
+const redisCache = require('../util/redisCache');
+const renderFunctions = require('../renderFunctions/items');
 exports.getItems = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -11,36 +11,10 @@ exports.getItems = (req, res, next) => {
   } else {
     apiUrl = 'https://pokeapi.co/api/v2/item';
   }
-  getData(apiUrl)
-    .then(data => {
-      
-       const items = data.results.map(item => {
-           item['sprite'] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item.name}.png`
-       }) 
-      res.render('items/items', {
-        items: data.results,
-        path: '/items',
-        title: 'Items',
-        previous: data.previous,
-        next: data.next
-      });
-    })
-    .catch(error => {
-      throw error;
-    });
+  redisCache(apiUrl, res, next, renderFunctions.itemsRender);
 };
 exports.getItem = (req, res, next) => {
   let { itemName } = req.params;
   const apiUrl = `https://pokeapi.co/api/v2/item/${itemName}`;
-  getData(apiUrl)
-    .then(data => {
-      res.render('items/item', {
-        path: '/item',
-        title: data.name,
-        data
-      });
-    })
-    .catch(err => {
-     error(err)
-    });
+  redisCache(apiUrl, res, next, renderFunctions.itemRender);
 };

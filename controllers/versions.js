@@ -1,5 +1,5 @@
-const getData = require('../util/getData');
-const error = require('../util/error')
+const redisCache = require('../util/redisCache');
+const renderFunctions = require('../renderFunctions/versions');
 exports.getVersions = (req, res, next) => {
   let apiUrl;
   const { nextPage } = req.body;
@@ -11,33 +11,10 @@ exports.getVersions = (req, res, next) => {
   } else {
     apiUrl = 'https://pokeapi.co/api/v2/version/';
   }
-  getData(apiUrl)
-    .then(data => {
-      res.render('list-page', {
-        itemName:'version',
-        items: data.results,
-        path: '/versions',
-        title: 'Versions',
-        previous: data.previous,
-        next: data.next
-      });
-    })
-    .catch(error => {
-      throw error;
-    });
+  redisCache(apiUrl, res, next, renderFunctions.versionsRender);
 };
 exports.getVersion = (req, res, next) => {
   let { versionName } = req.params;
   const apiUrl = `https://pokeapi.co/api/v2/version/${versionName}`
-  getData(apiUrl)
-    .then(data => {
-      res.render('versions/version', {
-        path: '/version',
-        title: data.name,
-        version:data
-      });
-    })
-    .catch(err => {
-      error(err)
-    });
+  redisCache(apiUrl, res, next, renderFunctions.versionRender);
 };
