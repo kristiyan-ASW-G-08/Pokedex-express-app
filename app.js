@@ -33,6 +33,9 @@ app.use(sassMiddleware({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 app.use(pokemonROuter)
 app.use(berriesRouter)
 app.use(versionGroupsRouter)
@@ -45,15 +48,18 @@ app.use(versionsRouter)
 app.use(regionsRouter)
 app.use(searchRouter)
 app.use(pokedexRouter)
+
 process.on('unhandledRejection', (reason, p) => {
   console.log(reason)
 });
 
-app.use(errorController.get404);
+
 
 app.use((error, req, res, next) => {
   res.status(404).redirect('/404');
 });
+app.use(errorController.get404);
+
 
 app.listen(3000);
 
