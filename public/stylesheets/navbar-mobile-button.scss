@@ -1,0 +1,39 @@
+@mixin easeOut{
+    transition: all 500ms ease-out;
+  }
+  
+.navbar-button{
+    z-index: 5;
+    padding: 1rem;
+    border: none;
+    @include desktop {
+      display: none;
+    }
+    background: transparent;
+    cursor: pointer;
+    @include easeOut;
+    outline:none;
+    .btn--line {
+      background: white;
+      width: 28px;
+      height: 3px;
+      margin: 0 0 5px 0;
+      @include easeOut;
+    }
+
+    &.close {
+      transform: rotate(180deg);
+      .btn--line {
+        &:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -6px);
+        }
+      }
+    }
+  
+}

@@ -2,7 +2,7 @@ const redis = require('redis');
 const client = redis.createClient();
 const getData = require('./getData');
 const error = require('./error');
-const cacheTime = 3600  * 10
+const cacheTime = 3600  * 1
 client.on('connect', error => {
   if (error) {
     console.log(error);
@@ -16,12 +16,10 @@ const redisCache = (targetUrl, res, next, renderFunc) => {
     } else {
       getData(targetUrl)
         .then(data => {
-          console.log('wasnt cahced');
           client.setex(targetUrl, cacheTime, JSON.stringify(data));
           renderFunc(data, res);
         })
         .catch(catchErr => {
-          console.log(catchErr);
           error(catchErr, next);
         });
     }
@@ -29,3 +27,5 @@ const redisCache = (targetUrl, res, next, renderFunc) => {
 };
 
 module.exports = redisCache;
+
+

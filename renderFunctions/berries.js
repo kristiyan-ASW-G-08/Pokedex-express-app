@@ -1,6 +1,5 @@
 const getStringValue = require('../util/getStringValue')
 const berryRender = (data,res) => {
-    console.log(data)
     const stats = getStringValue(data);
     const berry = {
       name: data.name,

@@ -5012,4 +5012,30 @@ a.box:active {
     background-color: #ff3860;
     color: #fff; }
 
+.navbar-button {
+  z-index: 5;
+  padding: 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 500ms ease-out;
+  outline: none; }
+  @media screen and (min-width: 1088px) {
+    .navbar-button {
+      display: none; } }
+  .navbar-button .btn--line {
+    background: white;
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    transition: all 500ms ease-out; }
+  .navbar-button.close {
+    transform: rotate(180deg); }
+    .navbar-button.close .btn--line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px); }
+    .navbar-button.close .btn--line:nth-child(2) {
+      opacity: 0; }
+    .navbar-button.close .btn--line:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px); }
+
 /*# sourceMappingURL=style.css.map */
