@@ -11,19 +11,26 @@ const generationsRender = (data, res) => {
     next
   });
 };
-const generationRender = (data, res) => {
-  const pokemon_species = data.pokemon_species.map(pokemon => {
-    const pokemonId = getPokemonIdFromUrl(pokemon.url);
-    const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
-    pokemon["id"] = pokemonId;
-    pokemon["spriteFront"] = spriteFront;
 
-    return pokemon;
+const generationRender = (data, res) => {
+  const { version_groups, id, moves, main_region } = data;
+  const generation = { version_groups, id, moves, main_region };
+  const pokedex = data.pokemon_species.map(pokemon => {
+    const id = getPokemonIdFromUrl(pokemon.url);
+    const spriteFront = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    return Object.assign(
+      {
+        id,
+        spriteFront
+      },
+      pokemon
+    );
   });
+  generation["pokedex"] = pokedex;
   res.render("generations/generation", {
     path: "/generation",
     title: data.name,
-    generation: data
+    generation
   });
 };
 const renderFunctions = {
