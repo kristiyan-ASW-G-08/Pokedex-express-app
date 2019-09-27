@@ -32,13 +32,11 @@ const toggleNavbarButton = () => {
   if (menuState) {
     navbarButton.classList.remove('close');
     navbarMenu.classList.remove('is-active');
-    // Set Menu State
     console.log('nani')
     menuState = false;
   } else if (!menuState) {
     navbarButton.classList.add('close');
     navbarMenu.classList.add('is-active');
-    // Set Menu State
     menuState = true;
   }
 };

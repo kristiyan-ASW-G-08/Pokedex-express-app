@@ -1,16 +1,9 @@
-const redisCache = require('../util/redisCache');
-const renderFunctions = require('../renderFunctions/moves');
+const redisCache = require("../util/redisCache");
+const renderFunctions = require("../renderFunctions/moves");
+const getApiUrl = require("../util/getApiUrl");
 exports.getMoves = (req, res, next) => {
-  let apiUrl;
-  const { nextPage } = req.body;
-  const { previousPage } = req.body;
-  if (nextPage) {
-    apiUrl = nextPage;
-  } else if (previousPage) {
-    apiUrl = previousPage;
-  } else {
-    apiUrl = 'https://pokeapi.co/api/v2/move';
-  }
+  const { nextPage, previousPage } = req.body;
+  const apiUrl = getApiUrl(nextPage, previousPage, "move");
   redisCache(apiUrl, res, next, renderFunctions.movesRender);
 };
 exports.getMove = (req, res, next) => {

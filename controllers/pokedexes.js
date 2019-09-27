@@ -1,17 +1,10 @@
-const redisCache = require('../util/redisCache');
-const renderFunctions = require('../renderFunctions/pokemon');
-const renderFunctions2 = require('../renderFunctions/pokedexes');
+const redisCache = require("../util/redisCache");
+const renderFunctions = require("../renderFunctions/pokemon");
+const renderFunctions2 = require("../renderFunctions/pokedexes");
+const getApiUrl = require("../util/getApiUrl");
 exports.getPokedexes = (req, res, next) => {
-  let apiUrl;
-  const { nextPage } = req.body;
-  const { previousPage } = req.body;
-  if (nextPage) {
-    apiUrl = nextPage;
-  } else if (previousPage) {
-    apiUrl = previousPage;
-  } else {
-    apiUrl = 'https://pokeapi.co/api/v2/pokedex/';
-  }
+  const { nextPage, previousPage } = req.body;
+  const apiUrl = getApiUrl(nextPage, previousPage, "pokedex");
   redisCache(apiUrl, res, next, renderFunctions2.pokedexesRender);
 };
 exports.getPokedex = (req, res, next) => {

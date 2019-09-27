@@ -1,18 +1,10 @@
-const renderFunctions  = require('../renderFunctions/berries')
-const redisCache = require('../util/redisCache');
+const renderFunctions = require("../renderFunctions/berries");
+const redisCache = require("../util/redisCache");
+const getApiUrl = require("../util/getApiUrl");
 exports.getBerries = (req, res, next) => {
-  let apiUrl;
-  const { nextPage } = req.body;
-  const { previousPage } = req.body;
-  if (nextPage) {
-    apiUrl = nextPage;
-  } else if (previousPage) {
-    apiUrl = previousPage;
-  } else {
-    apiUrl = 'https://pokeapi.co/api/v2/berry/';
-  }
+  const { nextPage, previousPage } = req.body;
+  const apiUrl = getApiUrl(nextPage, previousPage, "berry");
   redisCache(apiUrl, res, next, renderFunctions.berriesRender);
-  
 };
 exports.getBerry = (req, res, next) => {
   let { berryName } = req.params;

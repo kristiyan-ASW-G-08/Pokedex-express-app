@@ -1,17 +1,18 @@
 const regionsRender = (data, res) => {
-  res.render('list-page', {
-    itemName: 'region',
+  const { next, previous } = data;
+  res.render("list-page", {
+    itemName: "region",
     items: data.results,
-    path: '/regions',
-    title: 'Regions',
-    previous: data.previous,
-    next: data.next
+    path: "/regions",
+    title: "Regions",
+    previous,
+    next
   });
 };
 
 const regionRender = (data, res) => {
-  res.render('regions/region', {
-    path: '/region',
+  res.render("regions/region", {
+    path: "/region",
     title: data.name,
     region: data
   });

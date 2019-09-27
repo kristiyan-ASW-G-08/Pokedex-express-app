@@ -1,17 +1,18 @@
 const versionGroupsRender = (data, res) => {
-  res.render('list-page', {
-    itemName: 'version-group',
+  const { next, previous } = data;
+  res.render("list-page", {
+    itemName: "version-group",
     items: data.results,
-    path: '/version-groups',
-    title: 'Version Groups',
-    previous: data.previous,
-    next: data.next
+    path: "/version-groups",
+    title: "Version Groups",
+    previous,
+    next
   });
 };
 
 const versionGroupRender = (data, res) => {
-  res.render('version-groups/version-group', {
-    path: '/version-group',
+  res.render("version-groups/version-group", {
+    path: "/version-group",
     title: data.name,
     versionGroup: data
   });
