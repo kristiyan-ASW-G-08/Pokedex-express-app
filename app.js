@@ -53,6 +53,7 @@ process.on("unhandledRejection", (reason, p) => {
 });
 
 app.use((error, req, res, next) => {
+  console.log(error);
   res.status(404).redirect("/404");
 });
 app.use(errorController.get404);
