@@ -1,13 +1,14 @@
 const getStats = data => {
-  return Object.entries(data).reduce((acc, curr) => {
-    const [name, value] = curr;
+  return Object.entries(data).reduce((acc, [name, value]) => {
     const statObject = {
       name: name.split("_").join(" "),
       value
     };
-    return typeof value === "string" || typeof value === "number"
-      ? [...acc, statObject]
-      : [...acc];
+    const types = {
+      string: [...acc, statObject],
+      number: [...acc, statObject]
+    };
+    return types[typeof value] || [...acc];
   }, []);
 };
 module.exports = getStats;

@@ -1,6 +1,6 @@
 const processPokemonList = require("../util/processPokemonList");
 const pokemonRender = (data, res) => {
-  const { moves, types } = data;
+  const { moves, types, height, weight, id } = data;
   const stats = data.stats.map(info => {
     return {
       statValue: info.base_stat,
@@ -18,12 +18,16 @@ const pokemonRender = (data, res) => {
   });
 
   const pokemon = {
+    height,
+    weight,
+    id,
     moves,
     sprites,
     stats,
     types,
     defaultSprite: data.sprites.front_default
   };
+  console.log(pokemon);
   res.render("pokemon/pokemon", {
     path: "/pokemon",
     title: data.name,

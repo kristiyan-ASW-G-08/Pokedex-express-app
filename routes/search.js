@@ -9,13 +9,13 @@ router.get('/search', searchController.getSearchPage);
 router.post(
   '/search',
   [
-    body('name', `Name should  be atleast 2 letters long`)
+    body('name', `Name should  be at least 2 letters long`)
       .exists()
       .escape()
       .isLength({ min: 2 })
       .isString()
       .trim(),
-      body('category', 'Category should  be atleast 4 letters long')
+      body('category', 'Category should  be at least 4 letters long')
       .exists()
       .escape()
       .isLength({ min: 4 })
