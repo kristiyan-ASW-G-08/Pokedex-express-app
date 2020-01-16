@@ -1,5 +1,5 @@
 const getPokemonIdFromUrl = url => {
-  const pokemonIdNum = url.split("/").length - 2;
-  return splitUrlArr[pokemonIdNum];
+  const splitUrl = url.split("/");
+  return splitUrl[splitUrl.length - 2];
 };
 module.exports = getPokemonIdFromUrl;
